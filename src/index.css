@@ -1,0 +1,123 @@
+* {
+  box-sizing: border-box;
+}
+
+*:focus {
+  outline: none;
+}
+
+body {
+  background: #e2f3f4;
+  font-family: 'Akaya Telivigala', cursive;
+  margin: 0;
+}
+
+.UserForm {
+  margin: 50px auto;
+  width: 500px;
+}
+
+.ErrorMessage {
+  background: #e63946;
+  border: 1px solid #e63946;
+  color: #f1faee;
+  font-size: 14px;
+  left: calc(100% + 20px);
+  margin: 0;
+  padding: 5px 10px;
+  position: absolute;
+  top: 31px;
+  white-space: nowrap;
+  width: auto;
+}
+
+.ErrorMessage::before {
+  border-bottom: 7px solid transparent;
+  border-right: 7px solid #e63946;
+  border-top: 7px solid transparent;
+  content: '';
+  height: 0;
+  left: -7px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+}
+
+input,
+textarea,
+select {
+  background: #f1faee;
+  border: 0;
+  border: 2px solid #1d3557;
+  color: #1d3557;
+  font-family: 'Akaya Telivigala', cursive;
+  font-size: 18px;
+  height: 40px;
+  padding: 10px;
+  width: 100%;
+}
+
+select {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+input.Invalid,
+textarea.Invalid,
+select.Invalid {
+  border-color: #e63946;
+}
+
+textarea {
+  min-height: 200px;
+  resize: none;
+}
+
+textarea ~ .ErrorMessage {
+  margin-top: -4px;
+}
+
+::-webkit-input-placeholder {
+  color: #1d3557;
+  font-family: 'Akaya Telivigala', cursive;
+  font-size: 18px;
+  opacity: 1;
+}
+
+::-moz-placeholder {
+  color: #1d3557;
+  font-family: 'Akaya Telivigala', cursive;
+  font-size: 18px;
+  opacity: 1;
+}
+
+:-moz-placeholder {
+  color: #1d3557;
+  font-family: 'Akaya Telivigala', cursive;
+  font-size: 18px;
+  opacity: 1;
+}
+
+.FormGroup {
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.Button {
+  background: #1d3557;
+  border: 0;
+  color: #f1faee;
+  cursor: pointer;
+  font-family: 'Akaya Telivigala', cursive;
+  font-size: 20px;
+  height: 40px;
+  width: 100px;
+}
+
+label {
+  display: block;
+  padding-bottom: 5px;
+  font-size: 18px;
+  text-transform: capitalize;
+}
