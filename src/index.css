@@ -13,7 +13,7 @@ body {
 }
 
 .UserForm {
-  margin: 50px auto;
+  margin: 35px auto;
   width: 500px;
 }
 
@@ -55,6 +55,7 @@ select {
   font-size: 18px;
   height: 40px;
   padding: 10px;
+  transition: border .5s;
   width: 100%;
 }
 
@@ -63,9 +64,9 @@ select {
   padding-bottom: 0;
 }
 
-input.Invalid,
-textarea.Invalid,
-select.Invalid {
+.Invalid input,
+.Invalid textarea,
+.Invalid select {
   border-color: #e63946;
 }
 
@@ -120,4 +121,16 @@ label {
   padding-bottom: 5px;
   font-size: 18px;
   text-transform: capitalize;
+}
+
+input[type="checkbox"] {
+  cursor: pointer;
+  margin: 0;
+  width: 40px;
+}
+
+h1 {
+  margin: 25px 0 0 0;
+  text-align: center;
+  text-decoration: underline;
 }

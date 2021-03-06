@@ -1,10 +1,10 @@
-import { Component } from "react";
+import * as constants from '../constants';
 import Button from '../components/UI/Button';
 import FormInput from '../components/UI/FormInput';
 import Select from '../components/UI/Select';
 import TextArea from '../components/UI/Textarea';
-import { isEmpty, isRegex, minCharactersCheck, selectBoxCheck } from '../validations';
-import * as constants from '../constants';
+import { Component } from "react";
+import { isCheckboxChecked, isEmpty, isRegex, minCharactersCheck, selectBoxCheck } from '../validations';
 
 class Form extends Component {
 
@@ -14,7 +14,7 @@ class Form extends Component {
       valid: false,
       value: ''
     }
-  }
+  };
 
   state = {
     aboutMe: {
@@ -56,6 +56,14 @@ class Form extends Component {
       validations: {required: true}
     },
 
+    notification: {
+      ...this.createInputOptions(),
+      label: 'Receive Notifications',
+      type: 'checkbox',
+      validationMessage: constants.IS_REQUIRED,
+      validations: {required: true, isCheckBox: true}
+    },
+
     timeZones: {
       ...this.createInputOptions(),
       label: 'Timezone',
@@ -89,27 +97,49 @@ class Form extends Component {
       isValid = selectBoxCheck(value, 'select');
     }
 
+    if(rules.isCheckBox) {
+      isValid = isCheckboxChecked(value);
+    }
+
     return isValid;
   };
 
   inputChangedHandler = (event, inputIdentfier) => {
     let updatedInputIdentfier = {...this.state[inputIdentfier]};
-    updatedInputIdentfier.value = event.target.value;
     updatedInputIdentfier.touched = true;
-    updatedInputIdentfier.valid = this.checkValidity(event.target.value, updatedInputIdentfier.validations);
+    if(updatedInputIdentfier.type === 'checkbox') {
+      updatedInputIdentfier.valid = event.target.checked;
+    } else {
+      updatedInputIdentfier.value = event.target.value;
+      updatedInputIdentfier.valid = this.checkValidity(event.target.value, updatedInputIdentfier.validations);
+    }
     this.setState({ [inputIdentfier]: updatedInputIdentfier });
+  };
+
+  resetInputField = (inputIdentfier) => {
+    document.querySelector('.UserForm select').selectedIndex = 0;
+    inputIdentfier.touched = false;
+    inputIdentfier.valid = false;
+    inputIdentfier.value = '';
   };
 
   checkIfFormIsValid = (isFormValid) => {
     if(isFormValid) {
       for(let key in this.state) {
         let updatedInputIdentfier = {...this.state[key]};
-        updatedInputIdentfier.touched = false;
-        updatedInputIdentfier.valid = false;
-        updatedInputIdentfier.value = '';
+        this.resetInputField(updatedInputIdentfier);
         this.setState({ [key]: updatedInputIdentfier });
       }
+
+      alert('Form submitted successfully!');
     }
+  };
+
+  scrollToTop = () => {
+    window.scrollTo({
+      behavior: 'smooth',
+      top: 0
+    });
   };
 
   onSubmitHandler = (event) => {
@@ -129,6 +159,7 @@ class Form extends Component {
     });
 
     this.checkIfFormIsValid(isFormValid);
+    this.scrollToTop();
   };
 
   renderForm = () => {
@@ -147,8 +178,7 @@ class Form extends Component {
 
       <Select
         changed={(event) => this.inputChangedHandler(event, 'timeZones')}
-        {...this.state['timeZones']}
-        value={this.state['timeZones'].value === "" ? '' : this.state['timeZones'].value} />
+        {...this.state['timeZones']} />
 
       <FormInput
         changed={(event) => this.inputChangedHandler(event, 'homePage')}
@@ -159,16 +189,21 @@ class Form extends Component {
         {...this.state['aboutMe']} />
 
       <FormInput
-        label="Receive Notifications"
-        type="checkbox" />
+        changed={(event) => this.inputChangedHandler(event, 'notification')}
+        {...this.state['notification']} />
 
       <Button text="Submit" />
     </form>
   };
 
   render () {
-    return this.renderForm();
-  }
+    return (
+      <>
+        <h1>Registration Form</h1>
+        {this.renderForm()}
+      </>
+    )
+  };
 };
 
 export default Form;

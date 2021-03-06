@@ -6,6 +6,6 @@ function App() {
       <Form />
     </main>
   );
-}
+};
 
 export default App;
