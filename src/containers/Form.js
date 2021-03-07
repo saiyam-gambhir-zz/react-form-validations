@@ -106,7 +106,6 @@ class Form extends Component {
 
   inputChangedHandler = (event, inputIdentfier) => {
     let updatedInputIdentfier = {...this.state[inputIdentfier]};
-    updatedInputIdentfier.touched = true;
     if(updatedInputIdentfier.type === 'checkbox') {
       updatedInputIdentfier.valid = event.target.checked;
     } else {
@@ -117,7 +116,6 @@ class Form extends Component {
   };
 
   resetInputField = (inputIdentfier) => {
-    document.querySelector('.UserForm select').selectedIndex = 0;
     inputIdentfier.touched = false;
     inputIdentfier.valid = false;
     inputIdentfier.value = '';
@@ -131,6 +129,7 @@ class Form extends Component {
         this.setState({ [key]: updatedInputIdentfier });
       }
 
+      document.querySelector('.UserForm select').selectedIndex = 0;
       alert('Form submitted successfully!');
     }
   };
