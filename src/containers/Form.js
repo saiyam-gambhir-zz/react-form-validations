@@ -153,9 +153,7 @@ class Form extends Component {
       this.setState({ [key]: updatedInputIdentfier });
     }
 
-    isFormValid = validFormInputs.every(input => {
-      return input;
-    });
+    isFormValid = validFormInputs.every(entry => entry);
 
     this.checkIfFormIsValid(isFormValid);
     this.scrollToTop();
