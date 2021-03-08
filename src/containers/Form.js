@@ -8,69 +8,26 @@ import * as validations  from '../validations';
 
 class Form extends Component {
 
-  createInputOptions = () => {
+  createInputOptions = (label, type, validationMessage, validations) => {
     return {
+      label,
       touched: false,
+      type,
       valid: false,
+      validationMessage,
+      validations: {...validations},
       value: ''
     }
   };
 
   state = {
-    aboutMe: {
-      ...this.createInputOptions(),
-      label: 'About Me',
-      validationMessage: constants.MINIMUM_CHARACTERS_REQUIRED,
-      validations: {required: true, minLength: 50}
-    },
-
-    email: {
-      ...this.createInputOptions(),
-      label: 'Email',
-      type: 'text',
-      validationMessage: constants.INVALID_EMAIL,
-      validations: {required: true, isEmail: true}
-    },
-
-    homePage: {
-      ...this.createInputOptions(),
-      label: 'Home Page',
-      type: 'text',
-      validationMessage: constants.INVALID_URL,
-      validations: {required: true, isUrl: true}
-    },
-
-    loginId: {
-      ...this.createInputOptions(),
-      label: 'Login ID',
-      type: 'text',
-      validationMessage: constants.IS_REQUIRED,
-      validations: {required: true}
-    },
-
-    name: {
-      ...this.createInputOptions(),
-      label: 'Name',
-      type: 'text',
-      validationMessage: constants.IS_REQUIRED,
-      validations: {required: true}
-    },
-
-    notification: {
-      ...this.createInputOptions(),
-      label: 'Receive Notifications',
-      type: 'checkbox',
-      validationMessage: constants.IS_REQUIRED,
-      validations: {required: true, isCheckBox: true}
-    },
-
-    timeZones: {
-      ...this.createInputOptions(),
-      label: 'Timezone',
-      options: constants.timeZones,
-      validationMessage: constants.IS_REQUIRED,
-      validations: {isSelect: true}
-    }
+    aboutMe: { ...this.createInputOptions('About Me', null, constants.MINIMUM_CHARACTERS_REQUIRED, {required: true, minLength: 50}) },
+    email: { ...this.createInputOptions('Email', 'text', constants.INVALID_EMAIL, {required: true, isEmail: true}) },
+    homePage: { ...this.createInputOptions('Home Page', 'text', constants.INVALID_URL, {required: true, isUrl: true}) },
+    loginId: { ...this.createInputOptions('Login ID', 'text', constants.IS_REQUIRED, {required: true}) },
+    name: { ...this.createInputOptions('Name', 'text', constants.IS_REQUIRED, {required: true}) },
+    notification: { ...this.createInputOptions('Receive Notifications', 'checkbox', constants.IS_REQUIRED, {required: true, isCheckBox: true}) },
+    timeZones: { ...this.createInputOptions('Timezone', null, constants.IS_REQUIRED, {isSelect: true}), options: constants.timeZones }
   };
 
   checkValidity = (value, rules) => {
