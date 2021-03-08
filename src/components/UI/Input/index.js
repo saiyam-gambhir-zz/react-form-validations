@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const formInput = (props) => {
+const input = (props) => {
   return (
     <div className={`FormGroup ${props.touched && !props.valid ? "Invalid" : null}`}>
       <label>{props.label}</label>
@@ -10,7 +10,7 @@ const formInput = (props) => {
   )
 };
 
-formInput.defaultProps = {
+input.defaultProps = {
   changed: () => {},
   label: '',
   touched: false,
@@ -20,7 +20,7 @@ formInput.defaultProps = {
   value: ''
 };
 
-formInput.propTypes = {
+input.propTypes = {
   changed: PropTypes.func,
   label: PropTypes.string,
   touched: PropTypes.bool,
@@ -30,4 +30,4 @@ formInput.propTypes = {
   value: PropTypes.string
 };
 
-export default formInput;
+export default input;

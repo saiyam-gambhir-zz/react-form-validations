@@ -1,10 +1,10 @@
 import * as constants from '../constants';
+import * as validations  from '../validations';
 import Button from '../components/UI/Button';
-import FormInput from '../components/UI/FormInput';
+import Input from '../components/UI/Input';
 import Select from '../components/UI/Select';
 import TextArea from '../components/UI/Textarea';
 import { Component } from "react";
-import * as validations  from '../validations';
 
 class Form extends Component {
 
@@ -120,15 +120,15 @@ class Form extends Component {
 
   renderForm = () => {
     return <form className="UserForm" onSubmit={this.onSubmitHandler}>
-      <FormInput
+      <Input
         changed={(event) => this.inputChangedHandler(event, 'loginId')}
         {...this.state['loginId']} />
 
-      <FormInput
+      <Input
         changed={(event) => this.inputChangedHandler(event, 'email')}
         {...this.state['email']} />
 
-      <FormInput
+      <Input
         changed={(event) => this.inputChangedHandler(event, 'name')}
         {...this.state['name']} />
 
@@ -136,7 +136,7 @@ class Form extends Component {
         changed={(event) => this.inputChangedHandler(event, 'timeZones')}
         {...this.state['timeZones']} />
 
-      <FormInput
+      <Input
         changed={(event) => this.inputChangedHandler(event, 'homePage')}
         {...this.state['homePage']} />
 
@@ -144,7 +144,7 @@ class Form extends Component {
         changed={(event) => this.inputChangedHandler(event, 'aboutMe')}
         {...this.state['aboutMe']} />
 
-      <FormInput
+      <Input
         changed={(event) => this.inputChangedHandler(event, 'notification')}
         {...this.state['notification']} />
 
