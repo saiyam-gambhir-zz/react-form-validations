@@ -4,7 +4,7 @@ import FormInput from '../components/UI/FormInput';
 import Select from '../components/UI/Select';
 import TextArea from '../components/UI/Textarea';
 import { Component } from "react";
-import { isCheckboxChecked, isEmpty, isRegex, minCharactersCheck, selectBoxCheck } from '../validations';
+import * as validations  from '../validations';
 
 class Form extends Component {
 
@@ -75,30 +75,32 @@ class Form extends Component {
 
   checkValidity = (value, rules) => {
     let isValid = true;
+    const { isCheckBox, isEmail, isSelect, isUrl, minLength, required } = rules;
+
     if(!rules) return true;
 
-    if(rules.required) {
-      isValid = isEmpty(value);
+    if(required) {
+      isValid = validations.isEmpty(value);
     }
 
-    if(rules.isEmail) {
-      isValid = isRegex(value, constants.EMAIL_REGEX);
+    if(isEmail) {
+      isValid = validations.isRegex(value, constants.EMAIL_REGEX);
     }
 
-    if(rules.isUrl) {
-      isValid = isRegex(value, constants.URL_REGEX);
+    if(isUrl) {
+      isValid = validations.isRegex(value, constants.URL_REGEX);
     }
 
-    if(rules.minLength) {
-      isValid = minCharactersCheck(value);
+    if(minLength) {
+      isValid = validations.minCharactersCheck(value);
     }
 
-    if(rules.isSelect) {
-      isValid = selectBoxCheck(value, 'select');
+    if(isSelect) {
+      isValid = validations.selectBoxCheck(value, 'select');
     }
 
-    if(rules.isCheckBox) {
-      isValid = isCheckboxChecked(value);
+    if(isCheckBox) {
+      isValid = validations.isCheckboxChecked(value);
     }
 
     return isValid;
