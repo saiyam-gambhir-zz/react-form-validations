@@ -1,9 +1,9 @@
 import * as constants from '../constants';
 import * as validations  from '../validations';
-import Button from '../components/UI/Button';
-import Input from '../components/UI/Input';
-import Select from '../components/UI/Select';
-import TextArea from '../components/UI/Textarea';
+import Button from '../components/UI/button';
+import Input from '../components/UI/input';
+import Select from '../components/UI/select';
+import TextArea from '../components/UI/textarea';
 import { Component } from "react";
 
 class Form extends Component {
@@ -53,7 +53,7 @@ class Form extends Component {
     }
 
     if(isSelect) {
-      isValid = validations.selectBoxCheck(value, 'select');
+      isValid = validations.isOptionSelected(value, 'select');
     }
 
     if(isCheckBox) {
@@ -80,17 +80,14 @@ class Form extends Component {
     inputIdentfier.value = '';
   };
 
-  checkIfFormIsValid = (isFormValid) => {
-    if(isFormValid) {
-      for(let key in this.state) {
-        let updatedInputIdentfier = {...this.state[key]};
-        this.resetInputField(updatedInputIdentfier);
-        this.setState({[key]: updatedInputIdentfier});
-      }
-
-      document.querySelector('.UserForm select').selectedIndex = 0;
-      alert('Form submitted successfully!');
+  resetForm = () => {
+    for(let key in this.state) {
+      let updatedInputIdentfier = {...this.state[key]};
+      this.resetInputField(updatedInputIdentfier);
+      this.setState({[key]: updatedInputIdentfier});
     }
+
+    document.querySelector('.UserForm select').selectedIndex = 0;
   };
 
   scrollToTop = () => {
@@ -114,7 +111,11 @@ class Form extends Component {
 
     isFormValid = validFormInputs.every(entry => entry);
 
-    this.checkIfFormIsValid(isFormValid);
+    if(isFormValid) {
+      this.resetForm();
+      alert('Form submitted successfully!');
+    }
+
     this.scrollToTop();
   };
 

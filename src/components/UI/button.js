@@ -1,12 +1,10 @@
 import PropTypes from 'prop-types';
 
-const button = (props) => {
-  return (
-    <div className="FormGroup">
-      <button className="Button">{props.text}</button>
-    </div>
-  )
-};
+const button = (props) => (
+  <div className="FormGroup">
+    <button className="Button">{props.text}</button>
+  </div>
+);
 
 button.defaultProps = {
   text: ''

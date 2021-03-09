@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import ValidationMessage from '../ValidationMessage';
+import ValidationMessage from './validationMessage';
 
 const select = (props) => {
 

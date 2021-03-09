@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types';
 
-const validationMessage = (props) => {
-  return props.touched && !props.valid ? <div className="ErrorMessage">{props.validationMessage}</div> : null
-};
+const validationMessage = (props) => props.touched && !props.valid ? <div className="ErrorMessage">{props.validationMessage}</div> : null;
 
 validationMessage.defaultProps = {
   touched: false,
