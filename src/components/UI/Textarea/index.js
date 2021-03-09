@@ -1,11 +1,15 @@
 import PropTypes from 'prop-types';
+import ValidationMessage from '../ValidationMessage';
 
 const textArea = (props) => {
+
+  const invalidClass = `${props.touched && !props.valid ? "Invalid" : null}`;
+
   return (
-    <div className={`FormGroup ${props.touched && !props.valid ? "Invalid" : null}`}>
+    <div className={`FormGroup ${invalidClass}`}>
       <label>{props.label}</label>
       <textarea value={props.value} onChange={props.changed}></textarea>
-      {props.touched && !props.valid ? <div className="ErrorMessage">{props.validationMessage}</div> : ''}
+      <ValidationMessage touched={props.touched} valid={props.valid} validationMessage={props.validationMessage} />
     </div>
   )
 };

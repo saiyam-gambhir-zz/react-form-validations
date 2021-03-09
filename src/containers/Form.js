@@ -21,13 +21,13 @@ class Form extends Component {
   };
 
   state = {
-    aboutMe: { ...this.createInputOptions('About Me', null, constants.MINIMUM_CHARACTERS_REQUIRED, {required: true, minLength: 50}) },
-    email: { ...this.createInputOptions('Email', 'text', constants.INVALID_EMAIL, {required: true, isEmail: true}) },
-    homePage: { ...this.createInputOptions('Home Page', 'text', constants.INVALID_URL, {required: true, isUrl: true}) },
-    loginId: { ...this.createInputOptions('Login ID', 'text', constants.IS_REQUIRED, {required: true}) },
-    name: { ...this.createInputOptions('Name', 'text', constants.IS_REQUIRED, {required: true}) },
-    notification: { ...this.createInputOptions('Receive Notifications', 'checkbox', constants.IS_REQUIRED, {required: true, isCheckBox: true}) },
-    timeZones: { ...this.createInputOptions('Timezone', null, constants.IS_REQUIRED, {isSelect: true}), options: constants.timeZones }
+    aboutMe: {...this.createInputOptions('About Me', null, constants.MINIMUM_CHARACTERS_REQUIRED, {required: true, minLength: 50})},
+    email: {...this.createInputOptions('Email', 'text', constants.INVALID_EMAIL, {required: true, isEmail: true})},
+    homePage: {...this.createInputOptions('Home Page', 'text', constants.INVALID_URL, {required: true, isUrl: true})},
+    loginId: {...this.createInputOptions('Login ID', 'text', constants.IS_REQUIRED, {required: true})},
+    name: {...this.createInputOptions('Name', 'text', constants.IS_REQUIRED, {required: true})},
+    notification: {...this.createInputOptions('Receive Notifications', 'checkbox', constants.IS_REQUIRED, {required: true, isCheckBox: true})},
+    timeZones: {...this.createInputOptions('Timezone', null, constants.IS_REQUIRED, {isSelect: true}), options: constants.timeZones}
   };
 
   checkValidity = (value, rules) => {
@@ -71,7 +71,7 @@ class Form extends Component {
       updatedInputIdentfier.value = event.target.value;
       updatedInputIdentfier.valid = this.checkValidity(event.target.value, updatedInputIdentfier.validations);
     }
-    this.setState({ [inputIdentfier]: updatedInputIdentfier });
+    this.setState({[inputIdentfier]: updatedInputIdentfier});
   };
 
   resetInputField = (inputIdentfier) => {
@@ -85,7 +85,7 @@ class Form extends Component {
       for(let key in this.state) {
         let updatedInputIdentfier = {...this.state[key]};
         this.resetInputField(updatedInputIdentfier);
-        this.setState({ [key]: updatedInputIdentfier });
+        this.setState({[key]: updatedInputIdentfier});
       }
 
       document.querySelector('.UserForm select').selectedIndex = 0;
@@ -109,7 +109,7 @@ class Form extends Component {
       let updatedInputIdentfier = {...this.state[key]};
       updatedInputIdentfier.touched = true;
       validFormInputs = [...validFormInputs, this.state[key].valid];
-      this.setState({ [key]: updatedInputIdentfier });
+      this.setState({[key]: updatedInputIdentfier});
     }
 
     isFormValid = validFormInputs.every(entry => entry);

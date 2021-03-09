@@ -1,8 +1,12 @@
 import PropTypes from 'prop-types';
+import ValidationMessage from '../ValidationMessage';
 
 const select = (props) => {
+
+  const invalidClass = `${props.touched && !props.valid ? "Invalid" : null}`;
+
   return (
-    <div className={`FormGroup ${props.touched && !props.valid ? "Invalid" : null}`}>
+    <div className={`FormGroup ${invalidClass}`}>
       <label>{props.label}</label>
       <select defaultValue="Select" onChange={props.changed}>
         <option value="Select" disabled>Select</option>
@@ -10,7 +14,7 @@ const select = (props) => {
           <option key={option} value={option}>{option}</option>
         )): null}
       </select>
-      {props.touched && !props.valid ? <div className="ErrorMessage">{props.validationMessage}</div> : null}
+      <ValidationMessage touched={props.touched} valid={props.valid} validationMessage={props.validationMessage} />
     </div>
   )
 };
